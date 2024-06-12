@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">codigo-en-clase</string>
+    <string name="IngreseNombre">Ingrese Nombre</string>
+    <string name="IngreseApellido">Ingrese Apellido</string>
+    <string name="Formulario">Formulario de Ingreso</string>
+    <string name="IngreseEdad">Ingrese Edad</string>
+    <string name="IngreseCorreo">Ingrese Correo</string>
+    <string name="Ingresar">Ingresar</string>
+    <string name="TomarFoto">Tomar Foto</string>
+</resources>
