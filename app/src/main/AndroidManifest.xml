@@ -9,7 +9,7 @@
         android:name="android.hardware.camera2"
         android:required="true" />
 
-    <uses-permission android:name="android.permission.CAMERA " />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <queries>
         <!-- Browser -->
