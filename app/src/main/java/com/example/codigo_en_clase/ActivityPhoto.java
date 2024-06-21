@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +32,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -38,7 +41,7 @@ import java.util.Date;
 public class ActivityPhoto extends AppCompatActivity {
   static final int peticionAccesoCamera = 101;
   static final int peticionCapturaImagen = 102;
-  String currentPhotoPath;
+  String currentPhotoPath, image64;
   ImageView ObjetoImagen;
   Button btnCaptura;
   String pathImagen;
@@ -122,13 +125,17 @@ public class ActivityPhoto extends AppCompatActivity {
 
     // Añadimos resultCode == RESULT_OK
     if (requestCode == peticionCapturaImagen && resultCode == RESULT_OK) {
-      // Bundle extras = data.getExtras();
-
-      // Bitmap imagen = (Bitmap) extras.get("data");
-
-      // ObjetoImagen.setImageBitmap(imagen);
       setPic();
       galleryAddPic();
+
+      Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+
+      if (bitmap != null) {
+        image64 = convertImageTo64(bitmap);
+        Log.i("Imagen ", image64);
+      } else {
+        Log.e("Error", "Bitmap is null");
+      }
     }
   }
 
@@ -210,5 +217,15 @@ public class ActivityPhoto extends AppCompatActivity {
 
     Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
     ObjetoImagen.setImageBitmap(bitmap);
+  }
+
+  private String convertImageTo64(Bitmap bitmap) {
+    ByteArrayOutputStream byteImage = new ByteArrayOutputStream();
+
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteImage);
+
+    byte[] byteArray = byteImage.toByteArray();
+
+    return Base64.encodeToString(byteArray, Base64.DEFAULT);
   }
 }

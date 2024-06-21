@@ -39,6 +39,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Codigoenclase"
         tools:targetApi="31">
+        <activity
+            android:name=".ActivityVideo"
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -47,7 +50,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity
